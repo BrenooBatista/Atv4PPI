@@ -2,8 +2,11 @@ import express from 'express';
 import session from 'express-session';
 
 import cookieParser from 'cookie-parser';
+import path from "path";
 
 const app = express();
+
+app.use(express.static(path.join(process.cwd(), './pages/public')));
 
 app.use(session({
     secret:'M1nhaChav3S3cr3t4',
@@ -299,5 +302,5 @@ app.get('/',verificarAutenticacao, menu);
 app.get('/cadastrarProduto',verificarAutenticacao, cadastroProduto);
 app.post('/cadastrarProduto',verificarAutenticacao, cadastrarProduto);
 app.listen(porta, host, () => {
-    console.log('Servidor iniciado e em execução no endereço http://${host}:${porta}');
+    console.log(`Servidor iniciado e em execução no endereço http://${host}:${porta}`);
 });
